@@ -19,11 +19,11 @@ If an invalid input is given by the user, they will be alerted and then made to 
 
 Upon successfully selecting Y or N for a given prompt, the user will receive a confirmatory message.
 
-![landing page](.assets/images/password-generator-website01.png)
+![landing page](.assets/password-generator-website01.png)
 
-![dialog box](.assets/images/password-generator-website02.png)
+![dialog box](.assets/password-generator-website02.png)
 
-![generated password](.assets/images/password-generator-website03.png)
+![generated password](.assets/password-generator-website03.png)
 
 ## License
 
