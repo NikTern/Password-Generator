@@ -16,9 +16,6 @@ function writePassword() {
 generateBtn.addEventListener("click", writePassword);
 
 
-
-
-
 // Declaring Prompt Function
 function givePrompts() {
   // Specify Length Prompt
@@ -36,7 +33,7 @@ function givePrompts() {
   // Initiate Character Type Selection Prompts
   window.alert("Select character types to include in password.")
 
-  // Allow Lowercase Letters Prompt
+  // Lowercase Letters Prompt
   var lowercase = window.prompt("Would you like your password to include *lowercase* characters? Respond Y/N:")
   lowercase = lowercase.toUpperCase()
 
@@ -53,7 +50,7 @@ function givePrompts() {
     window.alert("Got it! Your password will not include lowercase letters.")
   }
   
-  // Allow Uppercase Letters Prompt
+  // Uppercase Letters Prompt
   var uppercase = window.prompt("Would you like your password to include UPPERCASE characters? Respond Y/N:")
   uppercase = uppercase.toUpperCase()
 
@@ -70,9 +67,9 @@ function givePrompts() {
     window.alert("Got it! Your password will NOT include uppercase letters.")
   }
 
-  // Allow Numeric Characters Prompt
+  // Numeric Characters Prompt
   var numeric = window.prompt("Would you like your password to include numeric characters? Respond Y/N:")
-  numeric = numeric.toUpperCase()  
+  numeric = numeric.toUpperCase()
 
   while (numeric != "Y" && numeric != "N") {
     window.alert("Invalid answer. Please respond with Y for yes or N for no.")
@@ -87,7 +84,7 @@ function givePrompts() {
     window.alert("Got it! Your password will NOT include numeric characters.")
   }
 
-  // Allow Special Characters Prompt
+  // Special Characters Prompt
   var special = window.prompt("Would you like your password to include special characters? Respond Y/N:")
   special = special.toUpperCase()  
 
@@ -104,35 +101,47 @@ function givePrompts() {
     window.alert("Got it! Your password will NOT include special characters.")
   }
 
-  console.log([length, lowercase, uppercase, numeric, special])
+  // CHECK: at least one character type should be selected:
+  if (lowercase === "N" && uppercase === "N" && numeric === "N" && special === "N") {
+    window.alert("Alert! At least one character type must be selected. Please try again.")
+    newprompts = givePrompts()
+    length = newprompts[0], lowercase = newprompts[1], uppercase = newprompts[2], numeric = newprompts[3], special = newprompts[4]
+  }
+
   return [length, lowercase, uppercase, numeric, special]
 }
 
-
-// WHEN asked for character types to include in the password
-// THEN I confirm whether or not to include , numeric, and/or special characters
-
-
-// WHEN I answer each prompt
-// THEN my input should be validated AND at least one character type should be selected
-
-
-
-
-
-
-
 // Declaring Generate Password Function
-function generatePassword(length_input, lowercase, uppercase, numeric, special ) {
-  if (length_input > 5) {
-    if (chartypes == "panda") {
-      return length_input*100 + 2
-    }
-    else {
-      return length_input*100
-    }
+function generatePassword(length, lowercase, uppercase, numeric, special ) {
+  // Assemble accepted characters into an array
+  selected_chars = []
+  lowercase_chars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+  uppercase_chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+  numeric_chars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  special_chars = ['`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '[', '}', ']', "\\", '|', ';', ':', '<', '>', ',', '.', '?', '/' ]
+  
+  if (lowercase == "Y"){
+    selected_chars = selected_chars.concat(lowercase_chars)
   }
-  else {
-    return "password output"
+  
+  if (uppercase == "Y"){
+    selected_chars = selected_chars.concat(uppercase_chars)
   }
+  
+  if (numeric == "Y") {
+    selected_chars = selected_chars.concat(numeric_chars)
+  }
+  
+  if (special == "Y") {
+    selected_chars = selected_chars.concat(special_chars)
+  }
+
+  // Randomly generate password of user-specified length based on selected characters
+  var generated_password = ""
+  
+  for (var i = 0; i < length; i++) {
+    generated_password += (selected_chars[Math.floor(Math.random()*(selected_chars.length - 1))])
+  }
+
+  return generated_password
 }
