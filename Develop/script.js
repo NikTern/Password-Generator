@@ -113,27 +113,19 @@ function givePrompts() {
 
 // Declaring Generate Password Function
 function generatePassword(length, lowercase, uppercase, numeric, special ) {
-  // Assemble accepted characters into an array
+  // Assemble user-selected character types into an array
   selected_chars = []
   lowercase_chars = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
   uppercase_chars = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
   numeric_chars = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
   special_chars = ['`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '+', '=', '{', '[', '}', ']', "\\", '|', ';', ':', '<', '>', ',', '.', '?', '/' ]
-  
-  if (lowercase == "Y"){
-    selected_chars = selected_chars.concat(lowercase_chars)
-  }
-  
-  if (uppercase == "Y"){
-    selected_chars = selected_chars.concat(uppercase_chars)
-  }
-  
-  if (numeric == "Y") {
-    selected_chars = selected_chars.concat(numeric_chars)
-  }
-  
-  if (special == "Y") {
-    selected_chars = selected_chars.concat(special_chars)
+  all_chars = [lowercase_chars, uppercase_chars, numeric_chars, special_chars]
+
+  user_inputs = [lowercase, uppercase, numeric, special]
+  for (var i = 0; i < user_inputs.length; i++) {
+    if (user_inputs[i] == "Y"){
+      selected_chars = selected_chars.concat(all_chars[i])
+    }
   }
 
   // Randomly generate password of user-specified length based on selected characters
